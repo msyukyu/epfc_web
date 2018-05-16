@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="web-f.css" />
+    <title>Design Fixe</title>
+</head>
+
+<body>
+    <header class="header-f">
+        <div>
+            <a href="index.html">
+                <img src="epfcweb_logoflame.png" alt="logo" />
+            </a>
+        </div>
+        <div class="titleBox">
+            <h1 class="titleSubBox">
+                Le titre dans la balise header de la page en design fixe.
+            </h1>
+        </div>
+    </header>
+
+    <div class="menu-f">
+        <nav class="nav-f">
+            <ul>
+                <li id="m1" class="menu">
+                    <a href="index.html">Accueil</a>
+                </li>
+                <li class="menu">Sections
+                    <ul id="sm2">
+                        <li>
+                            <div id="section1" class="section-switch">texte</div>
+                        </li>
+                        <li>
+                            <div id="section2" class="section-switch">iframe</div>
+                        </li>
+                        <li>
+                            <div id="section3" class="section-switch">superposition</div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu">3
+                    <ul id="sm3">
+                        <li>
+                            <a href="">31</a>
+                        </li>
+                        <li>
+                            <a href="">32</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu">4
+                    <ul id="sm4">
+                        <li>
+                            <a href="">41</a>
+                        </li>
+                        <li>
+                            <a href="">42</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu">5
+                    <ul id="sm5">
+                        <li>
+                            <a href="">51</a>
+                        </li>
+                        <li>
+                            <a href="">52</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <aside class="aside-left-f content-f">
+        <form action="index.html" method="POST">
+            <div class="form-connexion form-fields">
+                <label class="form-label" for="connect_email">email</label>
+                <input id="connect_email" class="form-field" name="connect_email" type="email" value="" size="30" required>
+                <label class="form-label" for="connect_mot_de_passe">mot de passe</label>
+                <input id="connect_mot_de_passe" type="password" class="form-field" name="connect_mot_de_passe" value="" size="30" required>
+            </div>
+            <div class="form-connexion">
+                <input class="input-button" type="submit" name="connexion" value="connexion" />
+            </div>
+        </form>
+    </aside>
+
+    <section class="section-f content-f">
+
+    </section>
+
+    <aside class="aside-right-f content-f">
+        <article class="news-f">
+            <header>
+                <div class="icon-news-f">Video</div>
+                <h3>Intro Hearts Burst Into Fire</h3>
+            </header>
+            <video class="video-news-f" controls>
+                <source src="hearts_burst_into_fire_intro.mp4" />
+                <source src="hearts_burst_into_fire_intro.ogg" />
+                <source src="hearts_burst_into_fire_intro.webm" />
+            </video>
+            <footer>
+                <p class="footer-news-f"> 10/05/2018 </p>
+            </footer>
+        </article>
+        <article class="news-f">
+            <header>
+                <div class="icon-news-f">Article</div>
+                <a href="index.html">
+                    <h3>Poudre aux yeux</h3>
+                </a>
+            </header>
+            <p class="hook-news-f"> Accroche de l'article. Elle est longue longue longue très longue tellement longue que son univers se finit avant
+                même qu'on ait pu la lire jusqu'au bout.</p>
+            <footer>
+                <p class="footer-news-f"> 10/05/2018 </p>
+            </footer>
+        </article>
+        <article class="news-f">
+            <header>
+                <div class="icon-news-f">Article</div>
+                <a href="index.html">
+                    <h3>Petite poudre aux yeux</h3>
+                </a>
+            </header>
+            <p class="hook-news-f"> Petite accroche d'article. Elle est assez courte et on peut la lire entièrement.</p>
+            <footer>
+                <p class="footer-news-f"> 13/05/2018 </p>
+            </footer>
+        </article>
+    </aside>
+
+    <footer class="footer-f">
+        <a href="https://fr.lipsum.com/">
+            <strong>Source du texte Lorem Ipsum</strong>
+        </a>
+    </footer>
+
+    <script src="web.js"></script>
+    <script> 
+        window.onload = setupFixed;        
+    </script>
+</body>
+
+</html>
