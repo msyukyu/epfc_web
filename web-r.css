@@ -1,0 +1,59 @@
+.global-menu-field {
+    margin: auto;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.global-menu-item {
+    float: left;
+}
+.menu-left-item {
+    float: left;
+}
+.menu-right-item {
+    float: left;
+}
+.menu-searchbar-h {
+    float: left;
+}
+.menu-home-h {
+    float: left;
+}
+.menu-profil-h {
+    float: left;
+}
+.menu-util-h {
+    float: left;
+}
+.menu-settings-h {
+    float: left;
+}
+.svg-subcontainer {
+    height: 31px;
+    width: 31px;
+}
+.svg-container {
+    position: relative; 
+    height: 0; 
+    width: 100%; 
+    padding: 0;
+    padding-bottom: 100%; 
+}
+svg {
+    position: absolute; 
+    height: 100%; 
+    width: 100%; 
+    left: 0; 
+    top: 0;
+}
+.conversation-field {
+    position: relative;
+}
+.conversation-menu-field {
+    position: relative;
+}
+.message-field {
+    position: relative;
+}

@@ -3,21 +3,23 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="stylesheet" href="web.css" />
+  <link rel="stylesheet" href="web-r.css" />
   <title>Design adaptatif</title>
 </head>
 
 <body>
   <header class="global-menu-field">
     <nav class="global-menu">
-      <div>logo, searchbar
-        <div>
+      <div class="global-menu-item">
+        <!-- logo, searchbar -->
+        <div class="menu-left-item">
           <!-- zone placement horizontal -->
           <div>
             <!-- centrage vertical (et zone cliquable) -->
             <a>
               <!-- hyperlink -->
-              <div>
+              <div class="svg-subcontainer">
+              <div class="svg-container">
                 <!-- conteneur de l'icone -->
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="ilogo" x="0px" y="0px"
                   viewbox="0 0 64 64" style="fill: rgb(0, 0, 0);" xml:space="preserve" width="64" height="64">
@@ -65,26 +67,28 @@
                   />
                 </svg>
               </div>
+              </div>
             </a>
           </div>
         </div>
-        <div>
+        <div class="menu-left-item">
           <!-- zone placement horizontal -->
-          <form action="messenger.html" method="POST">
-            <div>
+          <form id="search" action="messenger.html" method="POST">
+            <div class="menu-searchbar-h">
               <!-- zone placement horizontal -->
               <div>
                 <!-- centrage vertical -->
                 <input type="search" placeholder="Rechercher" value="" name="search" />
               </div>
             </div>
-            <div>
+            <div class="menu-searchbar-h">
               <!-- zone de placement horizontal -->
               <div>
                 <!-- centrage vertical (et zone cliquable) -->
-                <a>
+                <button type="submit">
                   <!-- hyperlink -->
-                  <div>
+                  <div class="svg-subcontainer">
+                  <div class="svg-container">
                     <!-- conteneur de l'icone -->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="isearch" x="0px" y="0px"
                       viewbox="0 0 64 64" style="fill: rgb(0, 0, 0);" xml:space="preserve" width="64" height="64">
@@ -107,24 +111,98 @@
                       <circle style="fill:url(#SVGID_3__48167);" cx="30.5" cy="30.5" r="6.5" />
                     </svg>
                   </div>
-                </a>
+                  </div>
+                </button>
               </div>
             </div>
           </form>
         </div>
       </div>
-      <div>
-        <div>
-          home, accueil
-        </div>
-        <div>invitations, messages, notifications
-          <div>
+      <div class="global-menu-item">
+        <div class="menu-right-item">
+          <!-- home, accueil -->
+          <div class="menu-home-h">
+            <!-- zone placement horizontal -->
+            <div>
+              <!-- centrage vertical (et zone cliquable) -->
+              <a>
+                <!-- hyperlink -->
+                <div class="menu-profil-h">
+                  <div class="svg-subcontainer">
+                    <div class="svg-container">
+                      <!-- conteneur de l'icone -->
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="iprofile" x="0px" y="0px"
+                        viewbox="0 0 64 64" style="fill: rgb(0, 0, 0);" xml:space="preserve" width="64" height="64">
+                        <lineargradient id="SVGID_1__49475" gradientunits="userSpaceOnUse" x1="41" y1="28" x2="41" y2="38.6719" spreadmethod="reflect">
+                          <stop offset="0" style="stop-color:#6DC7FF" />
+                          <stop offset="1" style="stop-color:#E6ABFF" />
+                        </lineargradient>
+                        <path style="fill:url(#SVGID_1__49475);" d="M37,32.828L37,32.828c0,2.089,1.527,3.955,3.607,4.153C42.993,37.209,45,35.339,45,33v0  c0-2.209-1.791-4-4-4h-0.172C38.714,29,37,30.714,37,32.828z"
+                        />
+                        <lineargradient id="SVGID_2__49475" gradientunits="userSpaceOnUse" x1="23" y1="28" x2="23" y2="38.6719" spreadmethod="reflect">
+                          <stop offset="0" style="stop-color:#6DC7FF" />
+                          <stop offset="1" style="stop-color:#E6ABFF" />
+                        </lineargradient>
+                        <path style="fill:url(#SVGID_2__49475);" d="M19,32.828L19,32.828c0,2.089,1.527,3.955,3.607,4.153C24.993,37.209,27,35.339,27,33v0  c0-2.209-1.791-4-4-4h-0.172C20.714,29,19,30.714,19,32.828z"
+                        />
+                        <lineargradient id="SVGID_3__49475" gradientunits="userSpaceOnUse" x1="32" y1="3.3333" x2="32" y2="60.3372" spreadmethod="reflect">
+                          <stop offset="0" style="stop-color:#1A6DFF" />
+                          <stop offset="1" style="stop-color:#C822FF" />
+                        </lineargradient>
+                        <path style="fill:url(#SVGID_3__49475);" d="M32,6C18.767,6,8,16.767,8,30v11c0,2.757,2.243,5,5,5v1c0,2.757,2.243,5,5,5h3v1  c0,2.757,2.243,5,5,5h12c2.757,0,5-2.243,5-5v-1h3c2.757,0,5-2.243,5-5v-1c2.757,0,5-2.243,5-5V30C56,16.767,45.233,6,32,6z M15,47  v-1h1h4c0.552,0,1,0.449,1,1v3h-3C16.346,50,15,48.654,15,47z M49,47c0,1.654-1.346,3-3,3h-3v-3c0-0.551,0.448-1,1-1h2h3V47z M54,41  c0,1.654-1.346,3-3,3h-5h-2c-1.654,0-3,1.346-3,3v4v1v1c0,1.654-1.346,3-3,3h-1v-4h-2v4h-2v-6h-2v6h-2v-4h-2v4h-1  c-1.654,0-3-1.346-3-3v-1v-1v-4c0-1.654-1.346-3-3-3h-4h-3c-1.654,0-3-1.346-3-3V30c0-3.6,0.875-6.997,2.414-10H13  c1.654,0,3,1.346,3,3v1h2v-1c0-2.572-1.96-4.672-4.46-4.945c2.297-3.538,5.581-6.375,9.46-8.122V13h2V9.148  c0.654-0.22,1.321-0.41,2-0.568V16h2V8.21c0.658-0.09,1.325-0.154,2-0.185V18h2V8.025c0.675,0.03,1.342,0.094,2,0.185V15h2V8.58  c0.679,0.159,1.346,0.348,2,0.568V13h2V9.933c3.879,1.747,7.163,4.584,9.46,8.122C47.96,18.328,46,20.428,46,23v1h2v-1  c0-1.654,1.346-3,3-3h0.586C53.125,23.003,54,26.4,54,30V41z"
+                        />
+                        <lineargradient id="SVGID_4__49475" gradientunits="userSpaceOnUse" x1="32" y1="3.3333" x2="32" y2="60.3372" spreadmethod="reflect">
+                          <stop offset="0" style="stop-color:#1A6DFF" />
+                          <stop offset="1" style="stop-color:#C822FF" />
+                        </lineargradient>
+                        <path style="fill:url(#SVGID_4__49475);" d="M30.4,39.467L27,44h10l-3.399-4.532C32.839,38.449,31.16,38.45,30.4,39.467z" />
+                        <lineargradient id="SVGID_5__49475" gradientunits="userSpaceOnUse" x1="41" y1="3.3333" x2="41" y2="60.3372" spreadmethod="reflect">
+                          <stop offset="0" style="stop-color:#1A6DFF" />
+                          <stop offset="1" style="stop-color:#C822FF" />
+                        </lineargradient>
+                        <path style="fill:url(#SVGID_5__49475);" d="M41,28h-0.172C38.166,28,36,30.166,36,32.828c0,2.646,1.982,4.907,4.513,5.149  C40.672,37.992,40.831,38,40.989,38c1.243,0,2.452-0.461,3.374-1.299C45.403,35.754,46,34.405,46,33C46,30.243,43.757,28,41,28z   M43.018,35.22c-0.634,0.576-1.455,0.85-2.315,0.766C39.187,35.841,38,34.454,38,32.828C38,31.269,39.269,30,40.828,30H41  c1.654,0,3,1.346,3,3C44,33.843,43.642,34.653,43.018,35.22z"
+                        />
+                        <lineargradient id="SVGID_6__49475" gradientunits="userSpaceOnUse" x1="23" y1="3.3333" x2="23" y2="60.3372" spreadmethod="reflect">
+                          <stop offset="0" style="stop-color:#1A6DFF" />
+                          <stop offset="1" style="stop-color:#C822FF" />
+                        </lineargradient>
+                        <path style="fill:url(#SVGID_6__49475);" d="M23,28h-0.172C20.166,28,18,30.166,18,32.828c0,2.646,1.982,4.907,4.513,5.149  C22.672,37.992,22.831,38,22.989,38c1.243,0,2.452-0.461,3.374-1.299C27.403,35.754,28,34.405,28,33C28,30.243,25.757,28,23,28z   M25.018,35.22c-0.634,0.576-1.455,0.85-2.315,0.766C21.187,35.841,20,34.454,20,32.828C20,31.269,21.269,30,22.828,30H23  c1.654,0,3,1.346,3,3C26,33.843,25.642,34.653,25.018,35.22z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="menu-profil-h">
+                  <!-- conteneur du texte -->
+                  Profil
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="menu-home-h">
             <!-- zone placement horizontal -->
             <div>
               <!-- centrage vertical (et zone cliquable) -->
               <a>
                 <!-- hyperlink -->
                 <div>
+                  <!-- conteneur du texte -->
+                  Accueil
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="menu-right-item">
+          <!-- invitations, messages, notifications -->
+          <div class="menu-util-h">
+            <!-- zone placement horizontal -->
+            <div>
+              <!-- centrage vertical (et zone cliquable) -->
+              <a>
+                <!-- hyperlink -->
+                <div class="svg-subcontainer">
+                <div class="svg-container">
                   <!-- conteneur de l'icone -->
                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="iinvitation" x="0px"
                     y="0px" viewbox="0 0 64 64" style="fill: rgb(0, 0, 0);" xml:space="preserve" width="64" height="64">
@@ -159,16 +237,18 @@
                     />
                   </svg>
                 </div>
+                </div>
               </a>
             </div>
           </div>
-          <div>
+          <div class="menu-util-h">
             <!-- zone placement horizontal -->
             <div>
               <!-- centrage vertical (et zone cliquable) -->
               <a>
                 <!-- hyperlink -->
-                <div>
+                <div class="svg-subcontainer">
+                <div class="svg-container">
                   <!-- conteneur de l'icone -->
                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="imessage" x="0px" y="0px"
                     viewbox="0 0 64 64" style="fill: rgb(0, 0, 0);" xml:space="preserve" width="64" height="64">
@@ -201,16 +281,18 @@
                     <rect x="26" y="12" style="fill:url(#SVGID_5__43664);" width="12" height="2" />
                   </svg>
                 </div>
+                </div>
               </a>
             </div>
           </div>
-          <div>
+          <div class="menu-util-h">
             <!-- zone placement horizontal -->
             <div>
               <!-- centrage vertical (et zone cliquable) -->
               <a>
                 <!-- hyperlink -->
-                <div>
+                <div class="svg-subcontainer">
+                <div class="svg-container">
                   <!-- conteneur de l'icone -->
                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="inotification" x="0px"
                     y="0px" viewbox="0 0 64 64" style="fill: rgb(0, 0, 0);" xml:space="preserve" width="64" height="64">
@@ -234,12 +316,124 @@
                     />
                   </svg>
                 </div>
+              </div>
               </a>
             </div>
           </div>
         </div>
-        <div>
-          aide, menu
+        <div class="menu-right-item">
+          <!-- aide, menu -->
+          <div class="menu-settings-h">
+            <!-- zone placement horizontal -->
+            <div>
+              <!-- centrage vertical (et zone cliquable) -->
+              <a>
+                <!-- hyperlink -->
+                <div class="svg-subcontainer">
+                <div class="svg-container">
+                  <!-- conteneur de l'icone -->
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="ihelp" x="0px" y="0px"
+                    viewbox="0 0 64 64" style="fill: rgb(0, 0, 0);" xml:space="preserve" width="64" height="64">
+                    <lineargradient id="SVGID_1__43969" gradientunits="userSpaceOnUse" x1="32.0001" y1="5.3335" x2="32.0001" y2="59.5071" spreadmethod="reflect">
+                      <stop offset="0" style="stop-color:#1A6DFF" />
+                      <stop offset="1" style="stop-color:#C822FF" />
+                    </lineargradient>
+                    <path style="fill:url(#SVGID_1__43969);" d="M58,19.001c0-3.566-1.415-6.892-3.985-9.366c-2.569-2.473-5.962-3.766-9.521-3.624  c-6.745,0.256-12.228,5.739-12.484,12.484C32.003,18.664,32.016,19,32.016,19H22c-8.822,0-16,7.178-16,16  c0,8.667,6.927,15.746,15.535,15.993l5.097,5.927C27.204,57.606,28.067,58,29,58c0.933,0,1.796-0.394,2.357-1.067l5.107-5.939  C45.073,50.746,52,43.667,52,35c0-1.01-0.1-2-0.287-3H58V19.001z M50,35c0,7.72-6.28,14-14,14h-0.459l-5.71,6.641  c-0.381,0.457-1.27,0.47-1.673-0.013L22.459,49H22c-7.72,0-14-6.28-14-14s6.28-14,14-14h10.157c0.402,3,1.592,5.057,3.477,7.016  C38.107,30.585,41.433,32,45,32h4.673C49.886,33,50,33.987,50,35z M56,30H45c-3.018,0-5.832-1.197-7.926-3.372  c-2.092-2.173-3.181-5.035-3.066-8.057C34.221,12.96,38.959,8.221,44.57,8.008c0.145-0.005,0.289-0.008,0.433-0.008  c2.862,0,5.556,1.083,7.625,3.074C54.803,13.169,56,15.983,56,19.001V30z"
+                    />
+                    <lineargradient id="SVGID_2__43969" gradientunits="userSpaceOnUse" x1="44.9997" y1="5.3335" x2="44.9997" y2="59.5071" spreadmethod="reflect">
+                      <stop offset="0" style="stop-color:#1A6DFF" />
+                      <stop offset="1" style="stop-color:#C822FF" />
+                    </lineargradient>
+                    <circle style="fill:url(#SVGID_2__43969);" cx="45" cy="25" r="2" />
+                    <lineargradient id="SVGID_3__43969" gradientunits="userSpaceOnUse" x1="27" y1="5.3333" x2="27" y2="59.5069" spreadmethod="reflect">
+                      <stop offset="0" style="stop-color:#1A6DFF" />
+                      <stop offset="1" style="stop-color:#C822FF" />
+                    </lineargradient>
+                    <rect x="24" y="26" style="fill:url(#SVGID_3__43969);" width="6" height="2" />
+                    <lineargradient id="SVGID_4__43969" gradientunits="userSpaceOnUse" x1="29" y1="5.3333" x2="29" y2="59.5069" spreadmethod="reflect">
+                      <stop offset="0" style="stop-color:#1A6DFF" />
+                      <stop offset="1" style="stop-color:#C822FF" />
+                    </lineargradient>
+                    <rect x="24" y="30" style="fill:url(#SVGID_4__43969);" width="10" height="2" />
+                    <lineargradient id="SVGID_5__43969" gradientunits="userSpaceOnUse" x1="31" y1="5.3333" x2="31" y2="59.5069" spreadmethod="reflect">
+                      <stop offset="0" style="stop-color:#1A6DFF" />
+                      <stop offset="1" style="stop-color:#C822FF" />
+                    </lineargradient>
+                    <rect x="24" y="34" style="fill:url(#SVGID_5__43969);" width="14" height="2" />
+                    <lineargradient id="SVGID_6__43969" gradientunits="userSpaceOnUse" x1="29" y1="5.3345" x2="29" y2="59.5062" spreadmethod="reflect">
+                      <stop offset="0" style="stop-color:#1A6DFF" />
+                      <stop offset="1" style="stop-color:#C822FF" />
+                    </lineargradient>
+                    <rect x="12" y="38" style="fill:url(#SVGID_6__43969);" width="34" height="2" />
+                    <lineargradient id="SVGID_7__43969" gradientunits="userSpaceOnUse" x1="29" y1="5.3328" x2="29" y2="59.5072" spreadmethod="reflect">
+                      <stop offset="0" style="stop-color:#1A6DFF" />
+                      <stop offset="1" style="stop-color:#C822FF" />
+                    </lineargradient>
+                    <rect x="19" y="42" style="fill:url(#SVGID_7__43969);" width="20" height="2" />
+                    <lineargradient id="SVGID_8__43969" gradientunits="userSpaceOnUse" x1="44.9998" y1="5.3335" x2="44.9998" y2="59.5065" spreadmethod="reflect">
+                      <stop offset="0" style="stop-color:#1A6DFF" />
+                      <stop offset="1" style="stop-color:#C822FF" />
+                    </lineargradient>
+                    <path style="fill:url(#SVGID_8__43969);" d="M45,12c-2.206,0-4,2-4,4h2c0-1,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2h-1v3h2v-1.126  c1-0.444,3-2.013,3-3.873C49,13.794,47.206,12,45,12z"
+                    />
+                    <lineargradient id="SVGID_9__43969" gradientunits="userSpaceOnUse" x1="16" y1="25.8335" x2="16" y2="36.8346" spreadmethod="reflect">
+                      <stop offset="0" style="stop-color:#6DC7FF" />
+                      <stop offset="1" style="stop-color:#E6ABFF" />
+                    </lineargradient>
+                    <path style="fill:url(#SVGID_9__43969);" d="M20,36h-8v-2c0-4.418,3.582-8,8-8h0V36z" />
+                  </svg>
+                </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="menu-settings-h">
+            <!-- zone placement horizontal -->
+            <div>
+              <!-- centrage vertical (et zone cliquable) -->
+              <a>
+                <!-- hyperlink -->
+                <div class="svg-subcontainer">
+                <div class="svg-container">
+                  <!-- conteneur de l'icone -->
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="imenu" x="0px" y="0px"
+                    viewbox="0 0 64 64" style="fill: rgb(0, 0, 0);" xml:space="preserve" width="64" height="64">
+                    <lineargradient id="SVGID_1__62062" gradientunits="userSpaceOnUse" x1="32" y1="6.3333" x2="32" y2="58.1817" spreadmethod="reflect">
+                      <stop offset="0" style="stop-color:#1A6DFF" />
+                      <stop offset="1" style="stop-color:#C822FF" />
+                    </lineargradient>
+                    <path style="fill:url(#SVGID_1__62062);" d="M32,58C17.663,58,6,46.337,6,32S17.663,6,32,6s26,11.663,26,26S46.337,58,32,58z M32,8  C18.767,8,8,18.767,8,32s10.767,24,24,24s24-10.767,24-24S45.233,8,32,8z"
+                    />
+                    <lineargradient id="SVGID_2__62062" gradientunits="userSpaceOnUse" x1="34.5" y1="17.5" x2="34.5" y2="47.3172" spreadmethod="reflect">
+                      <stop offset="0" style="stop-color:#6DC7FF" />
+                      <stop offset="1" style="stop-color:#E6ABFF" />
+                    </lineargradient>
+                    <path style="fill:url(#SVGID_2__62062);" d="M20,43v2c0,1.105,0.895,2,2,2h25c1.105,0,2-0.895,2-2v-2c0-1.105-0.895-2-2-2H22  C20.895,41,20,41.895,20,43z"
+                    />
+                    <lineargradient id="SVGID_3__62062" gradientunits="userSpaceOnUse" x1="32" y1="17.5" x2="32" y2="47.3172" spreadmethod="reflect">
+                      <stop offset="0" style="stop-color:#6DC7FF" />
+                      <stop offset="1" style="stop-color:#E6ABFF" />
+                    </lineargradient>
+                    <path style="fill:url(#SVGID_3__62062);" d="M16,27v2c0,1.105,0.895,2,2,2h28c1.105,0,2-0.895,2-2v-2c0-1.105-0.895-2-2-2H18  C16.895,25,16,25.895,16,27z"
+                    />
+                    <lineargradient id="SVGID_4__62062" gradientunits="userSpaceOnUse" x1="25" y1="17.5" x2="25" y2="47.3172" spreadmethod="reflect">
+                      <stop offset="0" style="stop-color:#6DC7FF" />
+                      <stop offset="1" style="stop-color:#E6ABFF" />
+                    </lineargradient>
+                    <path style="fill:url(#SVGID_4__62062);" d="M16,19v2c0,1.105,0.895,2,2,2h14c1.105,0,2-0.895,2-2v-2c0-1.105-0.895-2-2-2H18  C16.895,17,16,17.895,16,19z"
+                    />
+                    <lineargradient id="SVGID_5__62062" gradientunits="userSpaceOnUse" x1="35.5" y1="17.5" x2="35.5" y2="47.3172" spreadmethod="reflect">
+                      <stop offset="0" style="stop-color:#6DC7FF" />
+                      <stop offset="1" style="stop-color:#E6ABFF" />
+                    </lineargradient>
+                    <path style="fill:url(#SVGID_5__62062);" d="M27,35v2c0,1.105,0.895,2,2,2h13c1.105,0,2-0.895,2-2v-2c0-1.105-0.895-2-2-2H29  C27.895,33,27,33.895,27,35z"
+                    />
+                  </svg>
+                </div>
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
