@@ -1,3 +1,4 @@
+window.onload = setupFixed;
 function show(id) {
     var e = document.getElementById(id);
     hideMenu();
