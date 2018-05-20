@@ -112,7 +112,7 @@ svg {
 .horizontal-extender {
     min-width: 90px;
     max-width: 400px;
-    width: calc(100vw - 493px); /* forcer la taille max du bouton accueil et du bouton profil ? (dépendant de la police?)*/
+    width: calc(100vw - 453.217px); /* forcer la taille max du bouton accueil et du bouton profil ? (dépendant de la police?)*/
 }
 .searchbutton {
     padding: 0;
