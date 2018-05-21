@@ -1,20 +1,26 @@
 body {
-    margin: 5px 5px 0px 5px;
-    background-color: #252525;
+    margin: 0px;
+    background-color: #303030;
     color: #c8c8c8;
 }
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #7b7b7b;
-    opacity: 1; /* Firefox */
+    opacity: 1;
+    /* Firefox */
 }
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
     color: #7b7b7b;
 }
 
-::-ms-input-placeholder { /* Microsoft Edge */
+::-ms-input-placeholder {
+    /* Microsoft Edge */
     color: #7b7b7b;
 }
+
 ul, li {
     list-style-type: none;
     list-style-position: inside;
@@ -27,93 +33,122 @@ a {
     text-decoration: none;
     color: unset;
 }
+
 .global-menu-field {
     width: 100%;
     overflow: hidden;
     display: flex;
     justify-content: center;
+    background-color: #252525;
+    border-bottom: 1px solid #202020;
+    position: fixed;
+    top: 0px;
+    z-index: 1000;
 }
+
 .global-menu-item {
     float: left;
 }
+
 .menu-left-item {
     float: left;
 }
+
 .menu-right-item {
     float: left;
 }
+
 .menu-open {
     margin-right: 9px;
 }
+
 .menu-continue {
     margin-left: 9px;
     margin-right: 9px;
 }
+
 .menu-close {
     margin-left: 9px;
 }
+
 .menu-searchbar-h {
     float: left;
 }
+
 .menu-home-h {
     float: left;
 }
+
 .menu-profil-h {
     float: left;
 }
+
 .menu-util-h {
     float: left;
 }
+
 .menu-settings-h {
     float: left;
 }
+
 .svg-subcontainer {
     height: 35px;
     width: 35px;
 }
+
 .svg-searchsubcontainer {
     height: calc(2em - 2px);
     width: calc(2em - 2px);
     max-width: 43px;
     max-height: 43px;
 }
+
 .svg-hyperlinksubcontainer {
     height: 28px;
     width: 28px;
 }
+
 .svg-container {
-    position: relative; 
-    height: 0; 
-    width: 100%; 
+    position: relative;
+    height: 0;
+    width: 100%;
     padding: 0;
-    padding-bottom: 100%; 
+    padding-bottom: 100%;
 }
+
 svg {
-    position: absolute; 
-    height: 100%; 
-    width: 100%; 
-    left: 0; 
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
     top: 0;
 }
+
 .conversation-field {
     position: relative;
 }
+
 .conversation-menu-field {
     position: relative;
 }
+
 .message-field {
     position: relative;
 }
+
 .vertical-filler {
     height: 43px;
     display: flex;
     align-items: center;
 }
+
 .horizontal-extender {
     min-width: 90px;
     max-width: 400px;
-    width: calc(100vw - 453.217px); /* forcer la taille max du bouton accueil et du bouton profil ? (dépendant de la police?)*/
+    width: calc(100vw - 443.217px);
+    /* forcer la taille max du bouton accueil et du bouton profil ? (dépendant de la police?)*/
 }
+
 .searchbutton {
     padding: 0;
     border-top: 1px solid #373737;
@@ -126,6 +161,7 @@ svg {
     border-radius: 0 5px 5px 0;
     cursor: pointer;
 }
+
 .searchfield {
     height: 2em;
     max-height: 43px;
@@ -136,18 +172,23 @@ svg {
     background-color: #212121;
     width: 100%;
     border-radius: 5px 0 0 5px;
-    padding-bottom: 0.3em;
+    padding-bottom: 0.25em;
     box-shadow: 0 0;
+    padding-left: 5px;
 }
+
 .searchfield:focus::placeholder {
     color: #9b9b9b;
 }
+
 .searchfield:focus:-ms-input-placeholder {
     color: #9b9b9b;
 }
+
 .searchfield:focus::-ms-input-placeholder {
     color: #9b9b9b;
 }
+
 .hyperlink {
     height: 28px;
     display: flex;
@@ -156,25 +197,45 @@ svg {
     padding-left: 9px;
     border-radius: 5px;
 }
+
 .hyperlink-svg {
     padding-left: 0;
 }
+
 .hyperlink-svg-only {
     border-radius: 5px;
 }
+
 .hyperlink:hover, .hyperlink-svg-only:hover {
     background-color: #191919;
 }
+
 .hyperlink:active, .hyperlink-svg-only:active {
     background-color: #434343;
 }
+
 .hyperlink-text {
     height: 100%;
     display: flex;
     align-items: center;
 }
+
 .vertical-line {
     width: 2px;
     height: 18px;
     background-color: #212121;
+}
+
+.menu-extender {
+    position: fixed;
+    background-color: #252525;
+    z-index: 1001;
+    border-top: 1px solid #373737;
+    border-left: 1px solid #373737;
+    border-bottom: 1px solid #151515;
+    border-right: 1px solid #151515;
+    border-radius: 5px;
+    box-sizing: border-box;
+    min-width: 172px;
+    display: none;
 }
