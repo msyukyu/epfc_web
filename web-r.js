@@ -35,7 +35,6 @@ function setupSI() {
         sis[i].addEventListener("focus", sIFocus, false);
         sis[i].addEventListener("focusout", sIFocusOut, false);
         sis[i].addEventListener("change", sIChange, false);
-        sis[i].addEventListener("click", sEShow, false);
     }
 }
 function setupSB() {
@@ -69,7 +68,10 @@ function setupExt() {
                 var positionLeftSearch = si.getBoundingClientRect().left;
                 var positionBottomSearch = si.getBoundingClientRect().top + si.offsetHeight;
                 var widthSearch = si.offsetWidth + sb.offsetWidth;
-                var styleSE = "top: " + positionBottomSearch + "px; left: " + positionLeftSearch + "px; width: " + widthSearch + "px;";
+                var styleSE = "top: " + positionBottomSearch + "px; " + 
+                    "left: " + positionLeftSearch + "px; " + 
+                    "width: " + widthSearch + "px; " +
+                    "display: none; ";
                 se.setAttribute("style", styleSE);
                 si.addEventListener("click", sEShow, false);
                 sb.addEventListener("click", sEShow, false);
@@ -82,8 +84,10 @@ function setupExt() {
 function sEHide(event) {
     var mes = document.getElementsByClassName(classME);
     for (var i = 0; i < mes.length; i++) {
-        var curAttributes = mes[i].getAttribute("style");
-        mes[i].setAttribute("style", curAttributes + " display: none;");
+        var style = mes[i].getAttribute("style");
+        var curDisplay = style.match(/display\:(.*);/)[0];
+        var rmDisplay = style.substring(0, style.indexOf(curDisplay, 0));
+        mes[i].setAttribute("style", rmDisplay + "display: none;");
     }
     document.removeEventListener("mouseup", sEHide, false);
 }
@@ -139,9 +143,12 @@ function sEShow(event) {
     var parEl = getFirstParent(event.target, "FORM");
     var classSE = parEl.id + classE;
     var se = document.getElementsByClassName(classSE)[0];
-    var curAttributes = se.getAttribute("style");
-    se.setAttribute("style", curAttributes + " display: unset;");
+    var style = se.getAttribute("style");
+    var curDisplay = style.match(/display\:(.*);/)[0];
+    var rmDisplay = style.substring(0, style.indexOf(curDisplay, 0));
+    se.setAttribute("style", rmDisplay + "display: unset;");
     document.addEventListener("mouseup", sEHide, false);
+    sEResize(event);
 }
 /* searchButton event functions */
 function sBMouseOver(event) {
@@ -221,16 +228,14 @@ function sEResize(event) {
                 var seWidth = si.offsetWidth + sb.offsetWidth;
                 var style = se.getAttribute("style");
                 var cseDisplay = style.match(/display\:(.*);/)[0];
-                if (cseDisplay != "display: none;") {
-                    var cseTop = style.match(/top\:(.*);/)[0];
-                    var cseLeft = style.match(/left\:(.*);/)[0];
-                    var cseWidth = style.match(/width\:(.*);/)[0];
-                    var cseTopValue = parseFloat(cseTop.match(/[0-9]+(.[0-9]+)*/)[0]);
-                    var cseLeftValue = parseFloat(cseLeft.match(/[0-9]+(.[0-9]+)*/)[0]);
-                    var cseWidthValue = parseFloat(cseWidth.match(/[0-9]+(.[0-9]+)*/)[0]);
-                    if (seLeft != cseLeftValue || seTop != cseTopValue || seWidth != cseWidthValue) {
-                        se.setAttribute("style", cseDisplay + " top: " + seTop + "px; left: " + seLeft + "px; width: " + seWidth + "px;");
-                    }
+                var cseTop = style.match(/top\:(.*);/)[0];
+                var cseLeft = style.match(/left\:(.*);/)[0];
+                var cseWidth = style.match(/width\:(.*);/)[0];
+                var cseTopValue = parseFloat(cseTop.match(/[0-9]+(.[0-9]+)*/)[0]);
+                var cseLeftValue = parseFloat(cseLeft.match(/[0-9]+(.[0-9]+)*/)[0]);
+                var cseWidthValue = parseFloat(cseWidth.match(/[0-9]+(.[0-9]+)*/)[0]);
+                if (seLeft != cseLeftValue || seTop != cseTopValue || seWidth != cseWidthValue) {
+                    se.setAttribute("style", "top: " + seTop + "px; left: " + seLeft + "px; width: " + seWidth + "px; " + cseDisplay);
                 }
             }
         }
