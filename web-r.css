@@ -2,6 +2,7 @@ body {
     margin: 0px;
     background-color: #303030;
     color: #c8c8c8;
+    font-family: 'Roboto', 'Helvetica', sans-serif;
 }
 
 ::placeholder {
@@ -106,6 +107,8 @@ a {
 .svg-hyperlinksubcontainer {
     height: 28px;
     width: 28px;
+    min-height: 28px;
+    min-width: 28px;
 }
 
 .svg-container {
@@ -136,7 +139,7 @@ svg {
     position: relative;
 }
 
-.vertical-filler {
+.vertical-filler-gm {
     height: 43px;
     display: flex;
     align-items: center;
@@ -218,6 +221,13 @@ svg {
     height: 100%;
     display: flex;
     align-items: center;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    font-weight: 700;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .vertical-line {
@@ -236,6 +246,52 @@ svg {
     border-right: 1px solid #151515;
     border-radius: 5px;
     box-sizing: border-box;
-    min-width: 172px;
+    min-width: 225px;
     display: none;
+    max-height: 253px;
+    overflow-y: hidden;
+}
+
+.menu-extender-header {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    border-bottom: 1px solid #202020;
+    font-size: small;
+    font-weight: 700;
+}
+
+.seh-element {
+    font-size: small;
+    font-weight: 500;
+}
+
+.meh-item-open {
+    float: left;
+}
+
+.meh-item-close {
+    float: right;
+}
+
+.menu-extender-header::after {
+    display: block;
+    visibility: hidden;
+    content: ".";
+    line-height: 0;
+    font-size: 0;
+    height: 0;
+    clear: both;
+}
+
+.vertical-filler-meh {
+    height: 28px;
+    display: flex;
+    align-items: center;
+}
+
+.extender-title {
+    padding-left: 9px;
+    padding-right: 9px;
 }

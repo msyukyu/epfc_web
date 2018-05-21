@@ -1,3 +1,7 @@
+/* compatibilities */
+if (!Element.prototype.matches) {
+    Element.prototype.matches = Element.prototype.msMatchesSelector;
+}
 /* initialization */
 window.onload = setupResponsive;
 const classSI = "searchfield";
@@ -68,8 +72,8 @@ function setupExt() {
                 var positionLeftSearch = si.getBoundingClientRect().left;
                 var positionBottomSearch = si.getBoundingClientRect().top + si.offsetHeight;
                 var widthSearch = si.offsetWidth + sb.offsetWidth;
-                var styleSE = "top: " + positionBottomSearch + "px; " + 
-                    "left: " + positionLeftSearch + "px; " + 
+                var styleSE = "top: " + positionBottomSearch + "px; " +
+                    "left: " + positionLeftSearch + "px; " +
                     "width: " + widthSearch + "px; " +
                     "display: none; ";
                 se.setAttribute("style", styleSE);
@@ -82,14 +86,17 @@ function setupExt() {
 }
 /* menu-extender event functions */
 function sEHide(event) {
-    var mes = document.getElementsByClassName(classME);
-    for (var i = 0; i < mes.length; i++) {
-        var style = mes[i].getAttribute("style");
-        var curDisplay = style.match(/display\:(.*);/)[0];
-        var rmDisplay = style.substring(0, style.indexOf(curDisplay, 0));
-        mes[i].setAttribute("style", rmDisplay + "display: none;");
+    var noHide = "." + classME + " *";
+    if (!event.target.matches(noHide)) { // trigger effect only when clicking on non- menu-extender element (or its children)
+        var mes = document.getElementsByClassName(classME);
+        for (var i = 0; i < mes.length; i++) {
+            var style = mes[i].getAttribute("style");
+            var curDisplay = style.match(/display\:(.*);/)[0];
+            var rmDisplay = style.substring(0, style.indexOf(curDisplay, 0));
+            mes[i].setAttribute("style", rmDisplay + "display: none;");
+        }
+        document.removeEventListener("mouseup", sEHide, false);
     }
-    document.removeEventListener("mouseup", sEHide, false);
 }
 /* searchInput event functions */
 function sIFocus(event) {
