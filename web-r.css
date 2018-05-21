@@ -199,6 +199,7 @@ svg {
     padding-right: 9px;
     padding-left: 9px;
     border-radius: 5px;
+    background-color: #252525;
 }
 
 .hyperlink-svg {
@@ -226,8 +227,21 @@ svg {
     -webkit-user-select: none;
     -ms-user-select: none;
     font-weight: 700;
+    background-color: inherit;
+}
+
+.overflowable {
     overflow: hidden;
     white-space: nowrap;
+}
+
+.overflowed::after {
+    content: "...";
+    position: absolute;
+    right: 0.2em;
+    padding-left: 0.1em;
+    pointer-events: none;
+    background-color: inherit;
 }
 
 .vertical-line {

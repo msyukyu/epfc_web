@@ -6,10 +6,13 @@ if (!Element.prototype.matches) {
 window.onload = setupResponsive;
 const classSI = "searchfield";
 const classSB = "searchbutton";
+const classSBar = "searchbar";
 const classGM = "global-menu-field";
 const classME = "menu-extender";
 const classC = "content";
 const classE = "-extender";
+const classOable = "overflowable";
+const classOed = "overflowed";
 const styleSBBase = "background-color: #212121;";
 const styleSBActive = "background-color: #191919;";
 const styleSBClick = "background-color: #434343;";
@@ -26,12 +29,16 @@ function getFirstParent(element, parentTagName) {
     }
     return parEl;
 }
+function isOverflowed(element) {
+    return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
+}
 /* setup events */
 function setupResponsive() {
     setupSI();
     setupSB();
     setupGM();
     setupExt();
+    setupOverflow();
 }
 function setupSI() {
     var sis = document.getElementsByClassName(classSI);
@@ -61,9 +68,9 @@ function setupGM() {
     document.defaultView.addEventListener("resize", gMResize, false);
 }
 function setupExt() {
-    var forms = document.getElementsByClassName("searchbar");
+    var forms = document.getElementsByClassName(classSBar);
     for (var h = 0; h < forms.length; h++) {
-        if (forms[h].id.indexOf("searchbar", 0) == 0) {
+        if (forms[h].id.indexOf(classSBar, 0) == 0) {
             var classSE = forms[h].id + classE;
             var se = document.getElementsByClassName(classSE)[0];
             if (se != null) {
@@ -83,6 +90,23 @@ function setupExt() {
         }
     }
     document.defaultView.addEventListener("resize", sEResize, false);
+}
+function setupOverflow() {
+    var overflowables = document.getElementsByClassName(classOable);
+    for (var i = 0; i < overflowables.length; i++) {
+        overflowables[i].addEventListener("overflow", tOverflow, false);
+        overflowables[i].addEventListener("underflow", tUnderflow, false);
+        if (isOverflowed(overflowables[i])) {
+            overflowables[i].classList.add(classOed);
+        }
+    }
+}
+/* text overflowed event functions */
+function tOverflow(event) {
+    event.target.classList.add(classOed);
+}
+function tUnderflow(event) {
+    event.target.classList.remove(classOed);
 }
 /* menu-extender event functions */
 function sEHide(event) {
@@ -222,9 +246,9 @@ function gMResize(event) {
     }
 }
 function sEResize(event) {
-    var forms = document.getElementsByClassName("searchbar");
+    var forms = document.getElementsByClassName(classSBar);
     for (var h = 0; h < forms.length; h++) {
-        if (forms[h].id.indexOf("searchbar", 0) == 0) {
+        if (forms[h].id.indexOf(classSBar, 0) == 0) {
             var classSE = forms[h].id + classE;
             var se = document.getElementsByClassName(classSE)[0];
             if (se != null) {
