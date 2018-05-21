@@ -276,7 +276,7 @@ svg {
     font-weight: 700;
 }
 
-.seh-element {
+.se-element {
     font-size: small;
     font-weight: 500;
 }
@@ -308,4 +308,20 @@ svg {
 .extender-title {
     padding-left: 9px;
     padding-right: 9px;
+}
+
+.se-loading {
+    position: absolute;
+    top: 26px;
+    height: 2px;
+    width: 100%;
+    background-color: #838383;
+}
+
+.se-loaded {
+    height: inherit;
+    background-image: -moz-linear-gradient(left, #233d88, #65228c);
+    background-image: -webkit-linear-gradient(left, #233d88, #65228c);
+    background-image: -o-linear-gradient(left, #233d88, #65228c);
+    background-image: linear-gradient(to right, #233d88, #65228c);
 }

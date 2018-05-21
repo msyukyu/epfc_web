@@ -13,11 +13,34 @@ const classC = "content";
 const classE = "-extender";
 const classOable = "overflowable";
 const classOed = "overflowed";
+const classSEH = "se-history";
+const classSES = "se-suggestion";
+const classSEL = "se-loading";
+const classSELed = "se-loaded";
 const styleSBBase = "background-color: #212121;";
 const styleSBActive = "background-color: #191919;";
 const styleSBClick = "background-color: #434343;";
 const styleSBHover = "background-color: #101010;";
 const configSearchErrorMsg = "Incoherent searchbar setup";
+/* DELETE ME pre-ajax tests */
+function preAjaxLoading(progressBarElement) {
+    var seled = progressBarElement.getElementsByClassName(classSELed)[0];
+    seled.style.width = 0;
+    progressBarElement.style.display = "block";
+    setTimeout(function () {
+        progressBarElement.style.display = "none";
+    }, 1200, progressBarElement);
+    var width = 0;
+    var id = setInterval(frame, 5);
+    function frame() {
+        if (width >= 100) {
+            clearInterval(id);
+        } else {
+            width++;
+            seled.style.width = width + '%';
+        }
+    }
+}
 /* utilities */
 function getFirstParent(element, parentTagName) {
     var parEl = element.parentElement;
@@ -37,7 +60,7 @@ function setupResponsive() {
     setupSI();
     setupSB();
     setupGM();
-    setupExt();
+    setupSE();
     setupOverflow();
 }
 function setupSI() {
@@ -46,6 +69,7 @@ function setupSI() {
         sis[i].addEventListener("focus", sIFocus, false);
         sis[i].addEventListener("focusout", sIFocusOut, false);
         sis[i].addEventListener("change", sIChange, false);
+        sis[i].addEventListener("input", sIInput, false);
     }
 }
 function setupSB() {
@@ -67,7 +91,7 @@ function setupGM() {
     }
     document.defaultView.addEventListener("resize", gMResize, false);
 }
-function setupExt() {
+function setupSE() {
     var forms = document.getElementsByClassName(classSBar);
     for (var h = 0; h < forms.length; h++) {
         if (forms[h].id.indexOf(classSBar, 0) == 0) {
@@ -86,6 +110,14 @@ function setupExt() {
                 se.setAttribute("style", styleSE);
                 si.addEventListener("click", sEShow, false);
                 sb.addEventListener("click", sEShow, false);
+                var seh = se.getElementsByClassName(classSEH)[0];
+                var ses = se.getElementsByClassName(classSES)[0];
+                var sel = se.getElementsByClassName(classSEL)[0];
+                seh.setAttribute("style", "display: unset;");
+                ses.setAttribute("style", "display: none;");
+                sel.style.display = "none";
+                seled = sel.getElementsByClassName(classSELed)[0];
+                seled.style.width = 0;
             }
         }
     }
@@ -168,6 +200,32 @@ function sIChange(event) {
     }
     else {
         throw new Error(configSearchErrorMsg);
+    }
+}
+function sIInput(event) {
+    var parEl = getFirstParent(event.target, "FORM");
+    var classSE = parEl.id + classE;
+    var se = document.getElementsByClassName(classSE)[0];
+    var ses = se.getElementsByClassName(classSES)[0];
+    var styleSes = ses.getAttribute("style");
+    var curDisplaySes = styleSes.match(/display\:(.*);/)[0];
+    var rmDisplaySes = styleSes.substring(0, styleSes.indexOf(curDisplaySes, 0));
+    var seh = se.getElementsByClassName(classSEH)[0];
+    var styleSeh = seh.getAttribute("style");
+    var curDisplaySeh = styleSeh.match(/display\:(.*);/)[0];
+    var rmDisplaySeh = styleSeh.substring(0, styleSeh.indexOf(curDisplaySeh, 0));
+    var sel = se.getElementsByClassName(classSEL)[0];
+    if (event.target.value != "") {
+        seh.setAttribute("style", rmDisplaySeh + "display: none;");
+        ses.setAttribute("style", rmDisplaySes + "display: unset;");
+        var seled = sel.getElementsByClassName(classSELed)[0];
+        preAjaxLoading(sel);
+    }
+    else {
+        ses.setAttribute("style", rmDisplaySes + "display: none;");
+        seh.setAttribute("style", rmDisplaySeh + "display: unset;");
+        var seled = sel.getElementsByClassName(classSELed)[0];
+        preAjaxLoading(sel);
     }
 }
 function sEShow(event) {
