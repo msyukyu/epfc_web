@@ -7,7 +7,6 @@ window.onload = setupResponsive;
 const classSI = "searchfield";
 const classSB = "searchbutton";
 const classSBar = "searchbar";
-const classGM = "global-menu-field";
 const classME = "menu-extender";
 const classC = "content";
 const classE = "-extender";
@@ -17,33 +16,41 @@ const classSEH = "se-history";
 const classSES = "se-suggestion";
 const classSEL = "se-loading";
 const classSELed = "se-loaded";
-const styleSBBase = "background-color: #212121;";
-const styleSBActive = "background-color: #191919;";
-const styleSBClick = "background-color: #434343;";
-const styleSBHover = "background-color: #101010;";
+const idGM = "global-menu-field";
+const colorSBBase = "#212121";
+const colorSBActive = "#191919";
+const colorSBClick = "#434343";
+const colorSBHover = "#101010";
 const configSearchErrorMsg = "Incoherent searchbar setup";
 /* DELETE ME pre-ajax tests */
 function preAjaxLoading(progressBarElement) {
     var seled = progressBarElement.getElementsByClassName(classSELed)[0];
-    seled.style.width = 0;
-    progressBarElement.style.display = "block";
-    setTimeout(function () {
-        progressBarElement.style.display = "none";
-    }, 1200, progressBarElement);
+    progressBarElement.setStyleProperty("display", "unset");
+    seled.setStyleProperty("width", "0%");
     var width = 0;
     var id = setInterval(frame, 5);
     function frame() {
         if (width >= 100) {
             clearInterval(id);
-        } else {
+            progressBarElement.setStyleProperty("display", "none");
+            seled.setStyleProperty("width", "0%");
+        }
+        else if(width + "%" != seled.getStylePropertyValue("width"))
+        {
+            clearInterval(id);
+        }
+        else {
             width++;
-            seled.style.width = width + '%';
+            seled.setStyleProperty("width", width + "%");
         }
     }
 }
 /* utilities */
-function getFirstParent(element, parentTagName) {
-    var parEl = element.parentElement;
+String.prototype.regExpEscape = function () {
+    return this.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'); // g to perform global match, $& refers to the matched part of string
+}
+Element.prototype.parentElementOfTag = function (parentTagName) {
+    var parEl = this.parentElement;
     while (parEl.tagName != parentTagName && parEl.tagName != "BODY") { // get first <form> parent if any
         parEl = parEl.parentElement;
     }
@@ -52,8 +59,39 @@ function getFirstParent(element, parentTagName) {
     }
     return parEl;
 }
-function isOverflowed(element) {
-    return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
+Element.prototype.isOverflowed = function () {
+    return this.scrollHeight > this.clientHeight || this.scrollWidth > this.clientWidth;
+}
+Element.prototype.getStylePropertyValue = function (property) {
+    if (this.hasAttribute("style")) {
+        var style = this.getAttribute("style");
+        var matches = style.match(property.regExpEscape() + ": (.*?);");
+        if (matches != null) {
+            return matches[1]; //capturing parenthesis are stored at 1st index;
+        }
+    }
+    return "";
+}
+Element.prototype.setStyleProperty = function (property, value) {
+    var newProperty = property + ": " + value + ";";
+    if (this.hasAttribute("style")) {
+        var style = this.getAttribute("style");
+        var matches = style.match(property.regExpEscape() + ":(.*?);");
+        if (matches != null) {
+            var is = style.indexOf(matches[0]);
+            var ie = is + matches[0].length;
+            var sStyle = style.substring(0, is);
+            var eStyle = style.substring(ie);
+            var newStyle = sStyle + eStyle;
+            this.setAttribute("style", newStyle + newProperty);
+        }
+        else {
+            this.setAttribute("style", style + newProperty);
+        }
+    }
+    else {
+        this.setAttribute("style", newProperty);
+    }
 }
 /* setup events */
 function setupResponsive() {
@@ -84,10 +122,9 @@ function setupSB() {
 }
 function setupGM() {
     var contents = document.getElementsByClassName(classC);
-    var heightMenuBase = document.getElementsByClassName(classGM)[0].offsetHeight;
-    var styleContent = "margin-top: " + heightMenuBase + "px;";
+    var heightMenuBase = document.getElementById(idGM).offsetHeight + "px";
     for (var i = 0; i < contents.length; i++) {
-        contents[i].setAttribute("style", styleContent);
+        contents[i].setStyleProperty("margin-top", heightMenuBase);
     }
     document.defaultView.addEventListener("resize", gMResize, false);
 }
@@ -95,29 +132,28 @@ function setupSE() {
     var forms = document.getElementsByClassName(classSBar);
     for (var h = 0; h < forms.length; h++) {
         if (forms[h].id.indexOf(classSBar, 0) == 0) {
-            var classSE = forms[h].id + classE;
-            var se = document.getElementsByClassName(classSE)[0];
+            var idSE = forms[h].id + classE;
+            var se = document.getElementById(idSE);
             if (se != null) {
                 var sb = forms[h].getElementsByClassName(classSB)[0];
                 var si = forms[h].getElementsByClassName(classSI)[0];
-                var positionLeftSearch = si.getBoundingClientRect().left;
-                var positionBottomSearch = si.getBoundingClientRect().top + si.offsetHeight;
-                var widthSearch = si.offsetWidth + sb.offsetWidth;
-                var styleSE = "top: " + positionBottomSearch + "px; " +
-                    "left: " + positionLeftSearch + "px; " +
-                    "width: " + widthSearch + "px; " +
-                    "display: none; ";
-                se.setAttribute("style", styleSE);
+                var positionLeftSearch = si.getBoundingClientRect().left + "px";
+                var positionBottomSearch = (si.getBoundingClientRect().top + si.offsetHeight) + "px";
+                var widthSearch = (si.offsetWidth + sb.offsetWidth) + "px";
+                se.setStyleProperty("top", positionBottomSearch);
+                se.setStyleProperty("left", positionLeftSearch);
+                se.setStyleProperty("width", widthSearch);
+                se.setStyleProperty("display", "none");
                 si.addEventListener("click", sEShow, false);
                 sb.addEventListener("click", sEShow, false);
                 var seh = se.getElementsByClassName(classSEH)[0];
                 var ses = se.getElementsByClassName(classSES)[0];
                 var sel = se.getElementsByClassName(classSEL)[0];
-                seh.setAttribute("style", "display: unset;");
-                ses.setAttribute("style", "display: none;");
-                sel.style.display = "none";
+                seh.setStyleProperty("display", "unset");
+                ses.setStyleProperty("display", "none");
+                sel.setStyleProperty("display", "none");
                 seled = sel.getElementsByClassName(classSELed)[0];
-                seled.style.width = 0;
+                seled.setStyleProperty("width", "0%");
             }
         }
     }
@@ -128,7 +164,7 @@ function setupOverflow() {
     for (var i = 0; i < overflowables.length; i++) {
         overflowables[i].addEventListener("overflow", tOverflow, false);
         overflowables[i].addEventListener("underflow", tUnderflow, false);
-        if (isOverflowed(overflowables[i])) {
+        if (overflowables[i].isOverflowed()) {
             overflowables[i].classList.add(classOed);
         }
     }
@@ -146,25 +182,22 @@ function sEHide(event) {
     if (!event.target.matches(noHide)) { // trigger effect only when clicking on non- menu-extender element (or its children)
         var mes = document.getElementsByClassName(classME);
         for (var i = 0; i < mes.length; i++) {
-            var style = mes[i].getAttribute("style");
-            var curDisplay = style.match(/display\:(.*);/)[0];
-            var rmDisplay = style.substring(0, style.indexOf(curDisplay, 0));
-            mes[i].setAttribute("style", rmDisplay + "display: none;");
+            mes[i].setStyleProperty("display", "none");
         }
         document.removeEventListener("mouseup", sEHide, false);
     }
 }
 /* searchInput event functions */
 function sIFocus(event) {
-    var parEl = getFirstParent(event.target, "FORM");
+    var parEl = event.target.parentElementOfTag("FORM");
     var sb = parEl.getElementsByClassName(classSB); // get paired searchButton inside (search) <form>
     if (sb.length == 1) {
-        sb[0].setAttribute("style", styleSBActive);
+        sb[0].setStyleProperty("background-color", colorSBActive);
         sb[0].addEventListener("mouseover", sBMouseOver, false);
         sb[0].addEventListener("mouseout", sBMouseOut, false);
         sb[0].removeEventListener("click", sBClickButton, false);
         if (sb[0].parentElement.querySelector(":hover") === sb[0]) {
-            sb[0].setAttribute("style", styleSBHover);
+            sb[0].setStyleProperty("background-color", colorSBHover);
         }
     }
     else {
@@ -172,15 +205,15 @@ function sIFocus(event) {
     }
 }
 function sIFocusOut(event) {
-    var parEl = getFirstParent(event.target, "FORM");
+    var parEl = event.target.parentElementOfTag("FORM");
     var sb = parEl.getElementsByClassName(classSB);
     if (sb.length == 1) {
-        sb[0].setAttribute("style", styleSBBase);
+        sb[0].setStyleProperty("background-color", colorSBBase);
         sb[0].removeEventListener("mouseover", sBMouseOver, false);
         sb[0].removeEventListener("mouseout", sBMouseOut, false);
         sb[0].addEventListener("click", sBClickButton, false);
         if (sb[0].parentElement.querySelector(":hover") === sb[0]) { // check if button has mouse over itself
-            sb[0].setAttribute("style", styleSBClick);
+            sb[0].setStyleProperty("background-color", colorSBClick);
         }
     }
     else {
@@ -188,7 +221,7 @@ function sIFocusOut(event) {
     }
 }
 function sIChange(event) {
-    var parEl = getFirstParent(event.target, "FORM");
+    var parEl = event.target.parentElementOfTag("FORM");
     var sb = parEl.getElementsByClassName(classSB);
     if (sb.length == 1) {
         if (event.target.value != "") {
@@ -203,51 +236,42 @@ function sIChange(event) {
     }
 }
 function sIInput(event) {
-    var parEl = getFirstParent(event.target, "FORM");
-    var classSE = parEl.id + classE;
-    var se = document.getElementsByClassName(classSE)[0];
+    var parEl = event.target.parentElementOfTag("FORM");
+    var idSE = parEl.id + classE;
+    var se = document.getElementById(idSE);
     var ses = se.getElementsByClassName(classSES)[0];
-    var styleSes = ses.getAttribute("style");
-    var curDisplaySes = styleSes.match(/display\:(.*);/)[0];
-    var rmDisplaySes = styleSes.substring(0, styleSes.indexOf(curDisplaySes, 0));
     var seh = se.getElementsByClassName(classSEH)[0];
-    var styleSeh = seh.getAttribute("style");
-    var curDisplaySeh = styleSeh.match(/display\:(.*);/)[0];
-    var rmDisplaySeh = styleSeh.substring(0, styleSeh.indexOf(curDisplaySeh, 0));
     var sel = se.getElementsByClassName(classSEL)[0];
     if (event.target.value != "") {
-        seh.setAttribute("style", rmDisplaySeh + "display: none;");
-        ses.setAttribute("style", rmDisplaySes + "display: unset;");
+        seh.setStyleProperty("display", "none");
+        ses.setStyleProperty("display", "unset");
         var seled = sel.getElementsByClassName(classSELed)[0];
         preAjaxLoading(sel);
     }
     else {
-        ses.setAttribute("style", rmDisplaySes + "display: none;");
-        seh.setAttribute("style", rmDisplaySeh + "display: unset;");
+        ses.setStyleProperty("display", "none");
+        seh.setStyleProperty("display", "unset");
         var seled = sel.getElementsByClassName(classSELed)[0];
         preAjaxLoading(sel);
     }
 }
 function sEShow(event) {
-    var parEl = getFirstParent(event.target, "FORM");
-    var classSE = parEl.id + classE;
-    var se = document.getElementsByClassName(classSE)[0];
-    var style = se.getAttribute("style");
-    var curDisplay = style.match(/display\:(.*);/)[0];
-    var rmDisplay = style.substring(0, style.indexOf(curDisplay, 0));
-    se.setAttribute("style", rmDisplay + "display: unset;");
+    var parEl = event.target.parentElementOfTag("FORM");
+    var idSE = parEl.id + classE;
+    var se = document.getElementById(idSE);
+    se.setStyleProperty("display", "unset");
     document.addEventListener("mouseup", sEHide, false);
     sEResize(event);
 }
 /* searchButton event functions */
 function sBMouseOver(event) {
-    event.target.setAttribute("style", styleSBHover);
+    event.target.setStyleProperty("background-color", colorSBHover);
 }
 function sBMouseOut(event) {
-    event.target.setAttribute("style", styleSBActive);
+    event.target.setStyleProperty("background-color", colorSBActive);
 }
 function sBMouseDown(event) {
-    event.target.setAttribute("style", styleSBClick);
+    event.target.setStyleProperty("background-color", colorSBClick);
     event.target.addEventListener("mouseout", sBDownOut, false);
 }
 function sBDownOut(event) {
@@ -256,7 +280,7 @@ function sBDownOut(event) {
 function documentMouseUp(event) {
     var sbs = document.getElementsByClassName(classSB);
     for (var i = 0; i < sbs.length; i++) {
-        sbs[i].setAttribute("style", styleSBBase);
+        sbs[i].setStyleProperty("background-color", colorSBBase);
         sbs[i].removeEventListener("mouseout", sBDownOut, false);
     }
     document.removeEventListener("mouseup", documentMouseUp, false);
@@ -266,7 +290,7 @@ function sBMouseUp(event) {
     document.removeEventListener("mouseup", documentMouseUp, false);
 }
 function sBClickButton(event) {
-    var parEl = getFirstParent(event.target, "FORM");
+    var parEl = event.target.parentElementOfTag("FORM");
     var si = parEl.getElementsByClassName(classSI);
     if (si.length == 1) {
         si[0].focus();
@@ -276,7 +300,7 @@ function sBClickButton(event) {
     }
 }
 function sBMode(event) {
-    var parEl = getFirstParent(event.target, "FORM");
+    var parEl = event.target.parentElementOfTag("FORM");
     var si = parEl.getElementsByClassName(classSI);
     if (si.length == 1) {
         if (document.activeElement == si[0] && si[0].value != "") { // check if searchInput has focus and is not empty
@@ -292,14 +316,12 @@ function sBMode(event) {
 }
 /* resize event functions */
 function gMResize(event) {
-    var menuHeight = document.getElementsByClassName(classGM)[0].offsetHeight;
+    var menuHeight = document.getElementById(idGM).offsetHeight + "px";
     var contents = document.getElementsByClassName(classC);
     for (var i = 0; i < contents.length; i++) {
-        var style = contents[i].getAttribute("style");
-        var marginTop = style.match(/^margin-top\:(.*);$/m)[0];
-        var marginTopValue = parseFloat(marginTop.match(/[0-9]+(.[0-9]+)*/)[0]);
+        var marginTopValue = contents[i].getStylePropertyValue("margin-top");
         if (menuHeight != marginTopValue) {
-            contents[i].setAttribute("style", "margin-top: " + menuHeight + "px;");
+            contents[i].setStyleProperty("margin-top", menuHeight);
         }
     }
 }
@@ -307,24 +329,25 @@ function sEResize(event) {
     var forms = document.getElementsByClassName(classSBar);
     for (var h = 0; h < forms.length; h++) {
         if (forms[h].id.indexOf(classSBar, 0) == 0) {
-            var classSE = forms[h].id + classE;
-            var se = document.getElementsByClassName(classSE)[0];
+            var idSE = forms[h].id + classE;
+            var se = document.getElementById(idSE);
             if (se != null) {
                 var sb = forms[h].getElementsByClassName(classSB)[0];
                 var si = forms[h].getElementsByClassName(classSI)[0];
-                var seLeft = si.getBoundingClientRect().left;
-                var seTop = si.getBoundingClientRect().top + si.offsetHeight;
-                var seWidth = si.offsetWidth + sb.offsetWidth;
-                var style = se.getAttribute("style");
-                var cseDisplay = style.match(/display\:(.*);/)[0];
-                var cseTop = style.match(/top\:(.*);/)[0];
-                var cseLeft = style.match(/left\:(.*);/)[0];
-                var cseWidth = style.match(/width\:(.*);/)[0];
-                var cseTopValue = parseFloat(cseTop.match(/[0-9]+(.[0-9]+)*/)[0]);
-                var cseLeftValue = parseFloat(cseLeft.match(/[0-9]+(.[0-9]+)*/)[0]);
-                var cseWidthValue = parseFloat(cseWidth.match(/[0-9]+(.[0-9]+)*/)[0]);
-                if (seLeft != cseLeftValue || seTop != cseTopValue || seWidth != cseWidthValue) {
-                    se.setAttribute("style", "top: " + seTop + "px; left: " + seLeft + "px; width: " + seWidth + "px; " + cseDisplay);
+                var seLeft = si.getBoundingClientRect().left + "px";
+                var seTop = (si.getBoundingClientRect().top + si.offsetHeight) + "px";
+                var seWidth = (si.offsetWidth + sb.offsetWidth) + "px";
+                var cseWidthValue = se.getStylePropertyValue("width");
+                var cseTopValue = se.getStylePropertyValue("top");
+                var cseLeftValue = se.getStylePropertyValue("left");
+                if (seLeft != cseLeftValue) {
+                    se.setStyleProperty("left", seLeft);
+                }
+                if (seTop != cseTopValue) {
+                    se.setStyleProperty("top", seTop);
+                }
+                if (seWidth != cseWidthValue) {
+                    se.setStyleProperty("width", seWidth);
                 }
             }
         }

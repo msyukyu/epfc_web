@@ -35,7 +35,7 @@ a {
     color: unset;
 }
 
-.global-menu-field {
+#global-menu-field {
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -199,7 +199,7 @@ svg {
     padding-right: 9px;
     padding-left: 9px;
     border-radius: 5px;
-    background-color: #252525;
+    background-color: inherit;
 }
 
 .hyperlink-svg {
@@ -263,6 +263,9 @@ svg {
     min-width: 225px;
     display: none;
     max-height: 253px;
+}
+
+#searchbar-gm-extender {
     overflow-y: hidden;
 }
 
@@ -274,11 +277,13 @@ svg {
     border-bottom: 1px solid #202020;
     font-size: small;
     font-weight: 700;
+    background-color: #2b2b2b;
 }
 
 .se-element {
     font-size: small;
     font-weight: 500;
+    background-color: #252525;
 }
 
 .meh-item-open {
