@@ -26,22 +26,21 @@ const configSearchErrorMsg = "Incoherent searchbar setup";
 function preAjaxLoading(progressBarElement) {
     var seled = progressBarElement.getElementsByClassName(classSELed)[0];
     progressBarElement.setStyleProperty("display", "unset");
-    seled.setStyleProperty("width", "0%");
+    seled.setStyleProperty("width", "0", "%");
     var width = 0;
     var id = setInterval(frame, 5);
     function frame() {
         if (width >= 100) {
             clearInterval(id);
             progressBarElement.setStyleProperty("display", "none");
-            seled.setStyleProperty("width", "0%");
+            seled.setStyleProperty("width", "0", "%");
         }
-        else if(width + "%" != seled.getStylePropertyValue("width"))
-        {
+        else if (width != seled.getStyleProperty("width")[0]) {
             clearInterval(id);
         }
         else {
             width++;
-            seled.setStyleProperty("width", width + "%");
+            seled.setStyleProperty("width", width, "%");
         }
     }
 }
@@ -62,18 +61,23 @@ Element.prototype.parentElementOfTag = function (parentTagName) {
 Element.prototype.isOverflowed = function () {
     return this.scrollHeight > this.clientHeight || this.scrollWidth > this.clientWidth;
 }
-Element.prototype.getStylePropertyValue = function (property) {
+Element.prototype.getStyleProperty = function (property) {
     if (this.hasAttribute("style")) {
         var style = this.getAttribute("style");
-        var matches = style.match(property.regExpEscape() + ": (.*?);");
+        var matches = style.match(property.regExpEscape() + ": ([0-9]+(\\.[0-9]+)?)?(.*?);");
         if (matches != null) {
-            return matches[1]; //capturing parenthesis are stored at 1st index;
+            if (matches[1] != "") {
+                return [matches[1], matches[3]];
+            }
+            else {
+                return [matches[3]]; //capturing parenthesis are stored at n-nd index;
+            }
         }
     }
-    return "";
+    return [""];
 }
-Element.prototype.setStyleProperty = function (property, value) {
-    var newProperty = property + ": " + value + ";";
+Element.prototype.setStyleProperty = function (property, value, units = "") {
+    var newProperty = property + ": " + value + units + ";";
     if (this.hasAttribute("style")) {
         var style = this.getAttribute("style");
         var matches = style.match(property.regExpEscape() + ":(.*?);");
@@ -122,9 +126,9 @@ function setupSB() {
 }
 function setupGM() {
     var contents = document.getElementsByClassName(classC);
-    var heightMenuBase = document.getElementById(idGM).offsetHeight + "px";
+    var heightMenuBase = document.getElementById(idGM).offsetHeight;
     for (var i = 0; i < contents.length; i++) {
-        contents[i].setStyleProperty("margin-top", heightMenuBase);
+        contents[i].setStyleProperty("margin-top", heightMenuBase, "px");
     }
     document.defaultView.addEventListener("resize", gMResize, false);
 }
@@ -137,12 +141,12 @@ function setupSE() {
             if (se != null) {
                 var sb = forms[h].getElementsByClassName(classSB)[0];
                 var si = forms[h].getElementsByClassName(classSI)[0];
-                var positionLeftSearch = si.getBoundingClientRect().left + "px";
-                var positionBottomSearch = (si.getBoundingClientRect().top + si.offsetHeight) + "px";
-                var widthSearch = (si.offsetWidth + sb.offsetWidth) + "px";
-                se.setStyleProperty("top", positionBottomSearch);
-                se.setStyleProperty("left", positionLeftSearch);
-                se.setStyleProperty("width", widthSearch);
+                var positionLeftSearch = si.getBoundingClientRect().left;
+                var positionBottomSearch = si.getBoundingClientRect().top + si.offsetHeight;
+                var widthSearch = si.offsetWidth + sb.offsetWidth;
+                se.setStyleProperty("top", positionBottomSearch, "px");
+                se.setStyleProperty("left", positionLeftSearch, "px");
+                se.setStyleProperty("width", widthSearch, "px");
                 se.setStyleProperty("display", "none");
                 si.addEventListener("click", sEShow, false);
                 sb.addEventListener("click", sEShow, false);
@@ -153,11 +157,10 @@ function setupSE() {
                 ses.setStyleProperty("display", "none");
                 sel.setStyleProperty("display", "none");
                 seled = sel.getElementsByClassName(classSELed)[0];
-                seled.setStyleProperty("width", "0%");
+                seled.setStyleProperty("width", "0", "%");
             }
         }
     }
-    document.defaultView.addEventListener("resize", sEResize, false);
 }
 function setupOverflow() {
     var overflowables = document.getElementsByClassName(classOable);
@@ -185,6 +188,7 @@ function sEHide(event) {
             mes[i].setStyleProperty("display", "none");
         }
         document.removeEventListener("mouseup", sEHide, false);
+        document.defaultView.removeEventListener("resize", sEResize, false);
     }
 }
 /* searchInput event functions */
@@ -261,6 +265,7 @@ function sEShow(event) {
     var se = document.getElementById(idSE);
     se.setStyleProperty("display", "unset");
     document.addEventListener("mouseup", sEHide, false);
+    document.defaultView.addEventListener("resize", sEResize, false);
     sEResize(event);
 }
 /* searchButton event functions */
@@ -316,12 +321,12 @@ function sBMode(event) {
 }
 /* resize event functions */
 function gMResize(event) {
-    var menuHeight = document.getElementById(idGM).offsetHeight + "px";
+    var menuHeight = document.getElementById(idGM).offsetHeight;
     var contents = document.getElementsByClassName(classC);
     for (var i = 0; i < contents.length; i++) {
-        var marginTopValue = contents[i].getStylePropertyValue("margin-top");
-        if (menuHeight != marginTopValue) {
-            contents[i].setStyleProperty("margin-top", menuHeight);
+        var marginTopValue = contents[i].getStyleProperty("margin-top");
+        if (menuHeight != marginTopValue[0] || marginTopValue[1] != "px") {
+            contents[i].setStyleProperty("margin-top", menuHeight, "px");
         }
     }
 }
@@ -331,23 +336,23 @@ function sEResize(event) {
         if (forms[h].id.indexOf(classSBar, 0) == 0) {
             var idSE = forms[h].id + classE;
             var se = document.getElementById(idSE);
-            if (se != null) {
+            if (se != null && se.getStyleProperty("display") != "none") {
                 var sb = forms[h].getElementsByClassName(classSB)[0];
                 var si = forms[h].getElementsByClassName(classSI)[0];
-                var seLeft = si.getBoundingClientRect().left + "px";
-                var seTop = (si.getBoundingClientRect().top + si.offsetHeight) + "px";
-                var seWidth = (si.offsetWidth + sb.offsetWidth) + "px";
-                var cseWidthValue = se.getStylePropertyValue("width");
-                var cseTopValue = se.getStylePropertyValue("top");
-                var cseLeftValue = se.getStylePropertyValue("left");
-                if (seLeft != cseLeftValue) {
-                    se.setStyleProperty("left", seLeft);
+                var seLeft = si.getBoundingClientRect().left;
+                var seTop = (si.getBoundingClientRect().top + si.offsetHeight);
+                var seWidth = (si.offsetWidth + sb.offsetWidth);
+                var cseWidthValue = se.getStyleProperty("width");
+                var cseTopValue = se.getStyleProperty("top");
+                var cseLeftValue = se.getStyleProperty("left");
+                if (seLeft != cseLeftValue[0] || cseLeftValue[1] != "px") {
+                    se.setStyleProperty("left", seLeft, "px");
                 }
-                if (seTop != cseTopValue) {
-                    se.setStyleProperty("top", seTop);
+                if (seTop != cseTopValue[0] || cseTopValue[1] != "px") {
+                    se.setStyleProperty("top", seTop, "px");
                 }
-                if (seWidth != cseWidthValue) {
-                    se.setStyleProperty("width", seWidth);
+                if (seWidth != cseWidthValue[0] || cseWidthValue[1] != "px") {
+                    se.setStyleProperty("width", seWidth, "px");
                 }
             }
         }
