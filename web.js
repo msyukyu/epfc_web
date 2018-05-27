@@ -21,8 +21,13 @@ function hideMenu() {
 function setupFixed() {
     setupMenu();
     setupHookOverflow();
+    setupStyleSwitch();
+    setupSectionSwitchNoAjax();
+    sectionSwitchNoAjax("section1");
+    /* ajax
     setupSectionSwitch()
     sectionSwitch("section1.html");
+    */
 }
 function setupMenu() {
     var menuElements = document.getElementsByClassName("menu");
@@ -56,41 +61,88 @@ function setupHookOverflow() {
         }
     }
 }
-function setupSectionSwitch() {
+function setupSectionSwitchNoAjax() {
     var ss = document.getElementsByClassName("section-switch");
     for (var i = 0; i < ss.length; i++) {
-        var ssid = ss[i].id;
         ss[i].onclick = function (event) {
-            sectionSwitch(event.target.id + '.html');
+            sectionSwitchNoAjax(event.target.id);
         }
+    }
+}
+function setupStyleSwitch() {
+    var ss = document.getElementsByClassName("style-switch");
+    for (var i = 0; i < ss.length; i++) {
+        ss[i].onclick = function (event) {
+            styleSwitch(event.target.id);
+        }
+    }
+}
+function styleSwitch(styleName) {
+    var style = document.getElementById("style");
+    if(styleName == "blanc")
+    {
+        style.setAttribute("href", "web-f-white.css");
+    }
+    else if(styleName == "noir") {
+        style.setAttribute("href", "web-f.css");
     }
 }
 function isOverflowed_Y(element) {
     return element.scrollHeight > element.clientHeight;
 }
-function sectionSwitch(newSectionPath) {
-    const req = new XMLHttpRequest(); //also check [fetch] API -> sectionSwitch2
-
-    req.onreadystatechange = function (event) {
-        if (this.readyState == XMLHttpRequest.DONE) {
-            if (this.status == 200) {
-                var elSection = document.getElementsByClassName("section-f");
-                for (var i = 0; i < elSection.length; i++) {
-                    elSection[i].innerHTML = this.responseText;
-                }
-            }
+function sectionSwitchNoAjax(sectionName) {
+    var s = document.getElementById("content-" + sectionName);
+    hideSection();
+    s.style.display = 'block';
+    // s.setAttribute("style", "display: unset");
+    if (s.id == "content-section2") {
+        var article = s.getElementsByClassName("article-f")[0];
+        if (article.childElementCount == 0) {
+            var iframe = document.createElement("iframe");
+            iframe.setAttribute("src", "https://fr.lipsum.com/");
+            article.appendChild(iframe);
         }
     }
-    req.open('GET', newSectionPath, true); //problème de sécurité avec google chrome et internet explorer (protocole file:// pas autorisé)
-    req.send(null);
 }
-function sectionSwitch2(newSectionPath) {
-    fetch(newSectionPath)
-        .then(response => response.text())
-        .then(function (text) {
-            var elSection = document.getElementsByClassName("section-f");
-            for (var i = 0; i < elSection.length; i++) {
-                elSection[i].innerHTML = text;
-            }
-        }); //toujours le même problème de sécurité qu'avec XMLHttpRequest
+function hideSection() {
+    var ss = document.getElementsByClassName("section-f");
+    for (var i = 0; i < ss.length; ++i) {
+        ss[i].setAttribute("style", "display: none");
+    }
 }
+
+// ajax (unused)
+// function setupSectionSwitch() {
+//     var ss = document.getElementsByClassName("section-switch");
+//     for (var i = 0; i < ss.length; i++) {
+//         ss[i].onclick = function (event) {
+//             sectionSwitch(event.target.id + '.html');
+//         }
+//     }
+// }
+// function sectionSwitch(newSectionPath) {
+//     const req = new XMLHttpRequest(); //also check [fetch] API -> sectionSwitch2
+
+//     req.onreadystatechange = function (event) {
+//         if (this.readyState == XMLHttpRequest.DONE) {
+//             if (this.status == 200) {
+//                 var elSection = document.getElementsByClassName("section-f");
+//                 for (var i = 0; i < elSection.length; i++) {
+//                     elSection[i].innerHTML = this.responseText;
+//                 }
+//             }
+//         }
+//     }
+//     req.open('GET', newSectionPath, true); //problème de sécurité avec google chrome et internet explorer (protocole file:// pas autorisé)
+//     req.send(null);
+// }
+// function sectionSwitch2(newSectionPath) {
+//     fetch(newSectionPath)
+//         .then(response => response.text())
+//         .then(function (text) {
+//             var elSection = document.getElementsByClassName("section-f");
+//             for (var i = 0; i < elSection.length; i++) {
+//                 elSection[i].innerHTML = text;
+//             }
+//         }); //toujours le même problème de sécurité qu'avec XMLHttpRequest
+// }

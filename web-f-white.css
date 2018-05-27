@@ -1,18 +1,18 @@
 ::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #7b7b7b;
+    color: #848484;
     opacity: 1;
     /* Firefox */
 }
 
 :-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: #7b7b7b;
+    color: #848484;
 }
 
 ::-ms-input-placeholder {
     /* Microsoft Edge */
-    color: #7b7b7b;
+    color: #848484;
 }
 
 ul, li {
@@ -24,18 +24,18 @@ ul, li {
 }
 
 textarea {
-    background-color: #202020;
-    color: #c0c0c0;
+    background-color: #DFDFDF;
+    color: #3F3F3F;
 }
 
 select {
-    background-color: #202020;
-    color: #c0c0c0;
+    background-color: #DFDFDF;
+    color: #3F3F3F;
 }
 
 td, th {
     text-align: center;
-    border: 1px solid #c0c0c0;
+    border: 1px solid #3F3F3F;
 }
 
 table {
@@ -48,12 +48,12 @@ a {
 }
 
 h1 {
-    color: #eeeeee;  
+    color: #111111;  
 }
 
 h3 {
     font-size: larger;
-    color: #cccccc;
+    color: #333333;
 }
 
 h2 {
@@ -66,18 +66,12 @@ h2 {
     color: #808080;
 }
 
-select {
-    margin-bottom: 1%;
-    margin-top: 1%;
-    margin-left: 6%;
-}
-
 body {
     margin: auto;
     width: 900px;
     padding: 0;
-    background-color: #1e1e1e;
-    color: #c0c0c0;
+    background-color: #E1E1E1;
+    color: #3F3F3F;
     overflow: hidden;
 }
 
@@ -86,7 +80,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100%;
-    background-color: #000;
+    background-color: #FFF;
     background-image: url('flame_background.gif');
     width: 600px;
 }
@@ -94,6 +88,7 @@ body {
 .titleSubBox {
     text-align: center;
     width: 600px;
+    color: #FFF;
 }
 
 .header-f {
@@ -123,7 +118,7 @@ body {
     position: fixed;
     top: 69px;
     width: 900px;
-    background-color: #252525;
+    background-color: #DADADA;
     height: 1.30em;
     z-index: 50;
 }
@@ -141,7 +136,7 @@ body {
     height: 1.30em;
     cursor: pointer;
     text-align: center;
-    background-color: #252525;
+    background-color: #DADADA;
     position: relative;
     right: 50%;
 }
@@ -158,16 +153,16 @@ body {
 .nav-f ul li a, .nav-f ul li div {
     display: block;
     height: 100%;
-    background-color: #252525;
-    color: #c0c0c0;
+    background-color: #DADADA;
+    color: #3F3F3F;
 }
 
 .nav-f ul li a:hover, .nav-f ul li div:hover {
-    background-color: #454545;
+    background-color: #BABABA;
 }
 
 .nav-f ul li:hover {
-    background-color: #353535;
+    background-color: #CACACA;
 }
 
 .footer-f {
@@ -180,12 +175,12 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 35;
-    background-color: #1e1e1e;
+    background-color: #E1E1E1;
 }
 
 .footer-f a {
     vertical-align: middle;
-    color: #777777;
+    color: #888888;
 }
 
 .footer-f a:hover, .aside-right-f a h3:hover {
@@ -221,15 +216,21 @@ body {
     padding: 0;
     float: none;
     width: 100%;
-    background-color: #151515;
+    background-color: #EAEAEA;
 }
 
 .form-field {
     border: none;
-    color: #c0c0c0;
-    background-color: #202020;
+    color: #3F3F3F;
+    background-color: #DFDFDF;
     max-width: 86%;
     max-height: 88%;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    margin-left: 6%;
+}
+
+select {
     margin-bottom: 1%;
     margin-top: 1%;
     margin-left: 6%;
@@ -252,24 +253,24 @@ body {
 }
 
 .form-field:focus {
-    background-color: #353535;
+    background-color: #CACACA;
 }
 
 .input-button {
-    background-color: #252525;
+    background-color: #DADADA;
     border-style: solid;
-    border-color: #454545;
+    border-color: #BABABA;
     width: 162px;
     color: unset;
-    color: #c0c0c0;
+    color: #3F3F3F;
 }
 
 .input-button:hover {
-    background-color: #353535;
+    background-color: #CACACA;
 }
 
 .input-button:active {
-    border-color: #555555;
+    border-color: #AAAAAA;
 }
 
 .section-f {
@@ -312,14 +313,14 @@ body {
 
 .news-f {
     float: none;
-    background-color: #252525;
+    background-color: #DADADA;
     width: 162px;
 }
 
 .icon-news-f {
     float: left;
     margin-right: 5px;
-    background-color: #151515;
+    background-color: #EAEAEA;
     padding-left: 3px;
     padding-right: 3px;
 }
@@ -349,13 +350,13 @@ body {
     position: absolute;
     right: 0.2em;
     bottom: 0;
-    background-color: #252525;
+    background-color: #DADADA;
 }
 
 .video-news-f {
     height: 122px;
     width: 100%;
-    border-color: black;
+    border-color: white;
 }
 
 .containerSquare {
