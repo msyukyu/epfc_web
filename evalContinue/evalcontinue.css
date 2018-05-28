@@ -1,0 +1,117 @@
+body {
+    width: 800px;
+    background-color: #cccccc;
+    color: #000000;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: small;
+    margin: auto;
+    overflow-x: hidden;
+}
+
+h1, h3 {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+ul, li {
+    list-style-type: none;
+    list-style-position: inside;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+header {
+    position: fixed;
+    top: 20px;
+    width: 800px;
+}
+
+header div {
+    float: left;
+    background-color: #eeeeee;
+}
+
+#logo {
+    width: 100px;
+    margin-right: 20px;
+    height: 100px;
+    text-align: center;
+    padding-top: 10px;
+    box-sizing: border-box;
+}
+
+#titre {
+    width: 680px;
+    height: 100px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+aside, section {
+    position: relative;
+    float: left;
+    background-color: #eeeeee;
+    
+}
+
+aside {
+    width: 200px;
+    margin-right: 20px;
+    height: calc(100vh - 140px - 90px);
+    padding-right: 5px;
+    padding-left: 5px;
+    box-sizing: border-box;
+    margin-top: 140px;
+    overflow-y: auto;
+}
+
+section {
+    width: 580px;
+    text-align: center;
+    overflow-y: auto;
+    height: calc(100vh - 140px - 90px);
+    margin-top: 140px;
+}
+
+footer {
+    position: fixed;
+    bottom: 20px;
+    background-color: #eeeeee;
+    margin-left: 30px;
+    height: 50px;
+    width: 720px;
+    padding-left: 5px;
+    padding-right: 5px;
+    box-sizing: border-box;
+}
+
+nav ul {
+    background-color: #ffffff;
+    width: 160px;
+    margin-left: 5px;
+    border: 1px solid #cccccc;
+    text-align: center;
+    font-weight: bold;
+}
+
+nav ul li a {
+    display: block;
+    height: 100%;
+}
+
+nav ul li a:hover {
+    background-color: #cccccc;
+}
+
+form {
+    border: 1px solid #cccccc;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
