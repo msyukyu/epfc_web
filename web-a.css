@@ -23,110 +23,160 @@ ul, li {
     text-decoration: none;
 }
 
-textarea {
-    background-color: #202020;
-    color: #c0c0c0;
-}
-
-select {
-    background-color: #202020;
-    color: #c0c0c0;
-}
-
-td, th {
-    text-align: center;
-    border: 1px solid #c0c0c0;
-}
-
-table {
-    border-collapse: collapse;
-}
-
 a {
     text-decoration: none;
     color: unset;
 }
 
-h1 {
-    color: #eeeeee;  
-}
-
-h3 {
-    font-size: larger;
-    color: #cccccc;
-}
-
-h2 {
-    margin: 10px;
-    text-align: center;
-    font-size: 2em;
-    border: none;
-    width: 540px;
-    padding-right: 20px;
-    color: #808080;
-}
-
 body {
-    margin: auto;
+    margin: 0;
     padding: 0;
     background-color: #1e1e1e;
     color: #c0c0c0;
 }
 
-.header-a {
-    float: left;
-    position: fixed;
-    left: 50%;
+header {
+    display: flex;
+    justify-content: center;
+    height: 69px;
+    margin-top: 20px;
 }
 
-.header-a div {
-    position: relative;
-    right: 50%;
-}
-
-.menu-a {
-    background-color: #252525;
-}
-
-.nav-a {
-    float: left;
-    position: relative;
-    left: 50%;
-    top: 69px;
-    height: 1.30em;
-}
-
-.nav-a ul li {
+nav ul li {
     float: left;
     width: 100px;
-    height: 1.30em;
     cursor: pointer;
     text-align: center;
     background-color: #252525;
-    position: relative;
-    right: 50%;
 }
 
-.menu ul li {
-    float: none;
-    right: 0;
-}
-
-.menu ul {
-    display: none;
-}
-
-.nav-a ul li a, .nav-a ul li div {
+nav ul li a, nav ul li div {
     display: block;
     height: 100%;
     background-color: #252525;
     color: #c0c0c0;
 }
 
-.nav-a ul li a:hover, .nav-a ul li div:hover {
+nav ul li a:hover, nav ul li div:hover {
     background-color: #454545;
 }
 
-.nav-a ul li:hover {
+nav ul li:hover {
     background-color: #353535;
+}
+
+#menu {
+    position: fixed;
+    top:0;
+    width: 100%;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    height: 20px;
+    background-color: #252525;
+    z-index: 10;
+}
+
+#m0 {
+    display: none;
+}
+
+#Llogo {
+    height: 69px;
+    width: calc(50vw - 150px);
+    background-color: #014a94;
+}
+
+#logo {
+    height: 69px;
+    width: 300px;
+    background-color: #014a94;
+}
+
+#Rlogo {
+    height: 69px;
+    width: calc(50vw - 150px);
+    background-color: #000000;
+}
+
+.menu ul {
+    display: none;
+}
+
+aside {
+    width: 33vw;
+    padding-right: 3vw;
+    padding-left: 3vw;
+    box-sizing: border-box;
+    text-align: justify;
+}
+
+section {
+    width: 33vw;
+    position: absolute;
+    left: 33vw;
+    z-index: 1;
+    padding-right: 3vw;
+    padding-left: 3vw;
+    box-sizing: border-box;
+    text-align: justify;
+}
+
+.wrapper {
+    position: absolute;
+    z-index: 5;
+    background-color: #454545;
+}
+
+#right {
+    left: 66vw;
+}
+
+@media (max-width: 1024px)
+{
+    section {
+        left: 10vw;
+    }
+    aside {
+        width: 70vw;
+        visibility: hidden;
+    }
+    #right {
+        left: 90vw;
+    }
+    .wrapper {
+        width: 10vw;
+        overflow-x: hidden;
+    }
+    section {
+        width: 80vw;
+    }
+    #right:hover {
+        right: 0;
+        width: 70vw;
+        position: absolute;
+        left: 30vw;
+    }
+    #left:hover {
+        left: 0;
+        width: 70vw;
+        position: absolute;
+    }
+    .wrapper:hover aside {
+        visibility: visible;
+    }
+}
+
+@media (max-width: 576px)
+{
+    nav ul li {
+        float: none;
+        /* display: none; */
+    }
+    .menu ul {
+        display: block;
+    }
+    #m0 {
+        display: block;
+    }
 }

@@ -80,7 +80,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100%;
-    background-color: #FFF;
+    background-color: #000;
     background-image: url('flame_background.gif');
     width: 600px;
 }
@@ -133,7 +133,6 @@ body {
 .nav-f ul li {
     float: left;
     width: 100px;
-    height: 1.30em;
     cursor: pointer;
     text-align: center;
     background-color: #DADADA;
