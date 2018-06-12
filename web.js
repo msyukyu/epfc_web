@@ -155,38 +155,38 @@ function hideSection() {
     }
 }
 
-// ajax (unused)
-// function setupSectionSwitch() {
-//     var ss = document.getElementsByClassName("section-switch");
-//     for (var i = 0; i < ss.length; i++) {
-//         ss[i].onclick = function (event) {
-//             sectionSwitch(event.target.id + '.html');
-//         }
-//     }
-// }
-// function sectionSwitch(newSectionPath) {
-//     const req = new XMLHttpRequest(); //also check [fetch] API -> sectionSwitch2
+//ajax (unused)
+function setupSectionSwitch() {
+    var ss = document.getElementsByClassName("section-switch");
+    for (var i = 0; i < ss.length; i++) {
+        ss[i].onclick = function (event) {
+            sectionSwitch(event.target.id + '.html');
+        }
+    }
+}
+function sectionSwitch(newSectionPath) {
+    const req = new XMLHttpRequest(); //also check [fetch] API -> sectionSwitch2
 
-//     req.onreadystatechange = function (event) {
-//         if (this.readyState == XMLHttpRequest.DONE) {
-//             if (this.status == 200) {
-//                 var elSection = document.getElementsByClassName("section-f");
-//                 for (var i = 0; i < elSection.length; i++) {
-//                     elSection[i].innerHTML = this.responseText;
-//                 }
-//             }
-//         }
-//     }
-//     req.open('GET', newSectionPath, true); //problème de sécurité avec google chrome et internet explorer (protocole file:// pas autorisé)
-//     req.send(null);
-// }
-// function sectionSwitch2(newSectionPath) {
-//     fetch(newSectionPath)
-//         .then(response => response.text())
-//         .then(function (text) {
-//             var elSection = document.getElementsByClassName("section-f");
-//             for (var i = 0; i < elSection.length; i++) {
-//                 elSection[i].innerHTML = text;
-//             }
-//         }); //toujours le même problème de sécurité qu'avec XMLHttpRequest
-// }
+    req.onreadystatechange = function (event) {
+        if (this.readyState == XMLHttpRequest.DONE) {
+            if (this.status == 200) {
+                var elSection = document.getElementsByClassName("section-f");
+                for (var i = 0; i < elSection.length; i++) {
+                    elSection[i].innerHTML = this.responseText;
+                }
+            }
+        }
+    }
+    req.open('GET', newSectionPath, true); //problème de sécurité avec google chrome et internet explorer (protocole file:// pas autorisé)
+    req.send(null);
+}
+function sectionSwitch2(newSectionPath) {
+    fetch(newSectionPath)
+        .then(response => response.text())
+        .then(function (text) {
+            var elSection = document.getElementsByClassName("section-f");
+            for (var i = 0; i < elSection.length; i++) {
+                elSection[i].innerHTML = text;
+            }
+        }); //toujours le même problème de sécurité qu'avec XMLHttpRequest
+}
